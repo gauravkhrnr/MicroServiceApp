@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+
+  transit:
+    image: gauravkhrnr/transit:latest
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - gauravkhrnr-network
+    
+networks:
+  gauravkhrnr-network:

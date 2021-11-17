@@ -1,0 +1,42 @@
+package com.sample.transit.controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.sample.transit.config.AccountsServiceConfig;
+import com.sample.transit.model.Properties;
+import com.sample.transit.repository.AccountsRepository;
+
+@RestController
+public class AccountsController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AccountsController.class);
+
+	@Autowired
+	private AccountsRepository accountsRepository;
+	
+	@Autowired
+	AccountsServiceConfig accountsConfig;
+
+	@GetMapping("/helloWorld")
+	public String getMessage() {
+		logger.info("getMessage() method started");
+		return "hello world";
+	}
+
+	@GetMapping("/account/properties")
+	public String getPropertyDetails() throws JsonProcessingException {
+		logger.info("getPropertyDetails() method started");
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Properties properties = new Properties(accountsConfig.getMsg(), accountsConfig.getBuildVersion(),
+				accountsConfig.getMailDetails(), accountsConfig.getActiveBranches());
+		String jsonStr = ow.writeValueAsString(properties);
+		logger.info("getPropertyDetails() method ended");
+		return jsonStr;
+	}
+}

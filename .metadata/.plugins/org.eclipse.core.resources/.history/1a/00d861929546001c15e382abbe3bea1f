@@ -1,0 +1,4 @@
+package com.tsys.transit.accounts.service;
+
+public class AccountService {
+}

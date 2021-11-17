@@ -1,0 +1,4 @@
+package com.tsys.accounts.service;
+
+public class AccountService {
+}

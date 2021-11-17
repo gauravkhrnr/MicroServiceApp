@@ -1,0 +1,7 @@
+1637036739806	Delete elements
+1637057525310	Delete element
+1637061003715	Rename resource 'gateway.properties'
+1637067816822	Rename resource 'accounts.properties'
+1637067830882	Rename resource 'accounts-dev.properties'
+1637067841144	Rename resource 'accounts-prod.properties'
+1637083555129	Rename package 'com.tsys.configserver'

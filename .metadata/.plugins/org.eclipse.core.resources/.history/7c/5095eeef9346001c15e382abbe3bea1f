@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+
+  accounts:
+    image: eazybytes/accounts:latest
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - transit-network
+    
+networks:
+  transit-network:
