@@ -1,74 +1,111 @@
-************************* Create docker image using docker file ********************************************
-docker build . -t transit <build image name>
-docker images [note: get all created images]
-docker image inspect <imageid> [note: Give the details of images]
-docker container inspect <containerid> [note: Give the details of container]
+# Microservices With Spring, Docker, Kubernetes
 
-******* Create and run docker images without using docker file defination ****
-- buildpacks (eg: paketo) is use to give cloud native docker images run on any cloud 
-- add plugins and configuration in pom.xml
-	    <plugin>
-			<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>transit/${project.artifactId}</name>
-					</image>
-			</configuration>
-		</plugin>
+[![Image](https://img-c.udemycdn.com/redactor/raw/article_lecture/2021-09-21_15-17-14-c5705dce975bc9d24b31214f80cda2b4.JPG "Master Microservices with Spring, Docker, Kubernetes")](https://www.udemy.com/course/master-microservices-with-spring-docker-kubernetes/?referralCode=9365DB9B7EE637F629A9)
 
-mvn clean install -Dmaven.test.skip=true
-mvn spring-boot:build-image [note: Create docker image by maven]
-docker images [note: get all created images]
+Learn how to create enterprise and production ready Microservices with Spring, Spring Cloud, Docker and Kubernetes.
 
-***************** Convert image into container *******************************
-docker run -p 8080:8080 <image tag name>
-[note: 1st port is use to expose content to outside world and 2nd is which is maintain by docker in its isolated env]
+## Topics covered in the course
+* Section 1 - Introduction to Microservices Architecture
+* Section 2 - Microservices & Spring Cloud (Match Made in Heaven)
+* Section 3 - How do we right size our Microservices & Identifying boundaries(Challenge 1)
+* Section 4 - Getting started with creation of accounts, loans & cards microservices
+* Section 5 - How do we build, deploy, scale our microservices using Docker (Challenge 2)
+* Section 6 - Introduction to Cloud Native Apps & 12factors
+* Section 7 - Configurations Management in Microservices (Challenge 3)
+* Section 8 - Service Discovery & Registration(Challenge 4)
+* Section 9 - Making Microservices Resilient (Challenge 5)
+* Section 10 - Handling Routing & Cross cutting concerns (Challenge 6)
+* Section 11 - Distributed tracing & Log aggregation (Challenge 7)
+* Section 12 - Monitoring Microservices Metrics & Health (Challenge 8)
+* Section 13 - Automatic self-heal, autoscale, deployments (Challenge 9)
 
-******************* Run docker container **********************************
-docker ps
-docker ps -a [note: -a show all container]
+## Pre-requisite for the course
+- Good understanding on Java and Spring concepts
+- Basic understanding on SpringBoot & REST services is a bonus but not mandatory
+- Interest to learn and explore about Microservices
 
-****************** Check Docker logs ***************************************
-docker logs <container id>
-docker logs -f <container id> [note: -f for follow]
+# Important Links
+- Spring Cloud Project - https://spring.io/projects/spring-cloud
+- Spring Cloud Config - https://spring.io/projects/spring-cloud-config
+- Spring Cloud Gateway - https://spring.io/projects/spring-cloud-gateway
+- Spring Cloud Netflix - https://spring.io/projects/spring-cloud-netflix
+- Spring Cloud Sleuth - https://spring.io/projects/spring-cloud-sleuth
+- The 12-factor App - https://12factor.net/
+- Docker - https://www.docker.com/
+- DockerHub - https://hub.docker.com/u/eazybytes
+- Cloud Native Buildpacks - https://buildpacks.io/
+- Resilience4j - https://resilience4j.readme.io/docs/getting-started
+- Zipkin - https://zipkin.io/
+- RabbitMQ - https://www.rabbitmq.com/
+- Micrometer - https://micrometer.io/
+- Prometheus - https://prometheus.io/
+- Grafana - https://grafana.com/
+- Kubernetes - https://kubernetes.io/
+- GCP - https://console.cloud.google.com/
+- GConsole -  https://cloud.google.com/sdk
 
-************************* Stop docker container ****************************
-docker stop <container id>
+## Maven Commands used in the course
 
-*************************** Pause docker container **************************
-docker pause <container id>
-docker unpause <container id>
+|     Maven Command       |     Description          |
+| ------------- | ------------- |
+| "mvn clean install -Dmaven.test.skip=true" | To generate a jar inside target folder |
+| "mvn spring-boot:run" | To start a springboot maven project |
+| "mvn spring-boot:build-image -Dmaven.test.skip=true" | To generate a docker image using Buildpacks. No need of Dockerfile |
 
-************************** kill docker container *****************************
-docker kill [note: instantly kill without get time]
+## Docker Commands used in the course
 
-************************** Check docker staticstic ***************************
-docker stats [note: check docker conatner staticstics]
+|     Docker Command       |     Description          |
+| ------------- | ------------- |
+| "docker build . -t eazybytes/accounts" | To generate a docker image based on a Dockerfile |
+| "docker run  -p 8081:8080 eazybytes/accounts" | To start a docker container based on a given image |
+| "docker images" | To list all the docker images present in the Docker server |
+| "docker image inspect image-id" | To display detailed image information for a given image id |
+| "docker image rm image-id" | To remove one or more images for a given image ids |
+| "docker image push docker.io/eazybytes/accounts" | To push an image or a repository to a registry |
+| "docker image pull docker.io/eazybytes/accounts" | To pull an image or a repository from a registry |
+| "docker ps" | To show all running containers |
+| "docker ps -a" | To show all containers including running and stopped |
+| "docker container start container-id" | To start one or more stopped containers |
+| "docker container pause container-id" | To pause all processes within one or more containers |
+| "docker container unpause container-id" | To unpause all processes within one or more containers |
+| "docker container stop container-id" | To stop one or more running containers |
+| "docker container kill container-id" | To kill one or more running containers instantly |
+| "docker container restart container-id" | To restart one or more containers |
+| "docker container inspect container-id" | To inspect all the details for a given container id |
+| "docker container logs container-id" | To fetch the logs of a given container id |
+| "docker container logs -f container-id" | To follow log output of a given container id |
+| "docker container rm container-id" | To remove one or more containers based on container ids |
+| "docker container prune" | To remove all stopped containers |
+| "docker compose up" | To create and start containers based on given docker compose file |
+| "docker compose stop" | To stop services |
 
-************************** Remove docker container ***************************
-docker rm <conatiner id>
+## Kubernetes Commands used in the course
 
-****************** Run docker in detach mode (run without displaing logs) ****
-docker run -d -p 8080:8080 /transit
+|     Kubernetes Command       |     Description          |
+| ------------- | ------------- |
+| "kubectl apply -f filename" | To create a deployment/service/configmap based on a given YAML file |
+| "kubectl get all" | To get all the components inside your cluster |
+| "kubectl get pods" | To get all the pods details inside your cluster |
+| "kubectl get pod pod-id" | To get the details of a given pod id |
+| "kubectl describe pod pod-id" | To get more details of a given pod id |
+| "kubectl delete pod pod-id" | To delete a given pod from cluster |
+| "kubectl get services" | To get all the services details inside your cluster |
+| "kubectl get service service-id" | To get the details of a given service id |
+| "kubectl describe service service-id" | To get more details of a given service id |
+| "kubectl get nodes" | To get all the node details inside your cluster |
+| "kubectl get node node-id" | To get the details of a given node |
+| "kubectl get replicasets" | To get all the replica sets details inside your cluster |
+| "kubectl get replicaset replicaset-id" | To get the details of a given replicaset |
+| "kubectl get deployments" | To get all the deployments details inside your cluster |
+| "kubectl get deployment deployment-id" | To get the details of a given deployment |
+| "kubectl get configmaps" | To get all the configmap details inside your cluster |
+| "kubectl get configmap configmap-id" | To get the details of a given configmap |
+| "kubectl get events --sort-by=.metadata.creationTimestamp" | To get all the events occured inside your cluster |
+| "kubectl scale deployment accounts-deployment --replicas=3" | To increase the number of replicas for a deployment inside your cluster |
+| "kubectl set image deployment accounts-deployment accounts=eazybytes/accounts:k8s" | To set a new image for a deployment inside your cluster |
+| "kubectl rollout history deployment accounts-deployment" | To know the rollout history for a deployment inside your cluster |
+| "kubectl rollout undo deployment accounts-deployment --to-revision=1" | To rollback to a given revision for a deployment inside your cluster |
+| "kubectl autoscale deployment accounts-deployment --min=3 --max=10 --cpu-percent=70" | To create automatic scaling using HPA for a deployment inside your cluster |
+| "kubectl logs node-id" | To get a logs of a given node inside your cluster |
 
-************************* Push image to docker hub ***************************
-docker tag <docker image name> <tag name>
-docker image push docker.io/gauravkhrnr/bank:latest
 
-
-****************** Docker compose ********************************************
-- It is a tool to define and run all container 
-- create yml file
-- put in root of project
-
-docker-compose up [note: run command for docker compose]
-docker-compose stop
-
-- https://docs.docker.com/compose/compose-file/ (check docker version)
-
-****************** Run zipkin ************************************************
-docker run -d -p 9411:9411 openzipkin/zipkin
-
-************************* Run rabbit mq *************************************
-docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
