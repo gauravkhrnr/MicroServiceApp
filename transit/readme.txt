@@ -1,82 +1,74 @@
----DOCKER
+************************* Create docker image using docker file ********************************************
+docker build . -t transit <build image name>
+docker images [note: get all created images]
+docker image inspect <imageid> [note: Give the details of images]
+docker container inspect <containerid> [note: Give the details of container]
 
-docker build . -t transit (build image)
-docker images (get all creatd images)
-docker image inspect <imageid> (give details of image)
-and 
-docker container inspect <containerid>
-
--- convert image to container
-docker run -p 8080:8080 (image tag name)
-(1st port is use to expose content to outside world)
-(2nd is which is maintain by docker in its isolated env)
-
--- check running container
-docker ps
-docker ps -a
-(-a show all container)
-
---docker logs
-docker logs (container id)
-
-docker logs -f (container id) 
-(-f for follow)
-
--- docker stop
-docker stop (container id)
-
---docker pause
-docker pause (container id)
-and 
-docker unpause (container id)
-
---kill docker container
-docker kill (instantly kill without get time)
-
---docker staticstic
-docker stats
-(check docker conatner staticstics)
-
--- remove docker container
-docker rm (conatiner id)
-
--- run docker in detach mode (run without displaing logs)
-docker run -d -p 8080:8080 easybytes/accounts
-
---create and run docker images without using docker file defination
+******* Create and run docker images without using docker file defination ****
 - buildpacks (eg: paketo) is use to give cloud native docker images run on any cloud 
 - add plugins and configuration in pom.xml
-	    --<plugin>
-			--<groupId>org.springframework.boot</groupId>
-				--<artifactId>spring-boot-maven-plugin</artifactId>
-				--<configuration>
-					--<image>
-						--<name>transit/${project.artifactId}</name>
-					--</image>
-			--</configuration>
-		-- </plugin>
+	    <plugin>
+			<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>transit/${project.artifactId}</name>
+					</image>
+			</configuration>
+		</plugin>
 
-- mvn spring-boot:build-image (run command)
+mvn clean install -Dmaven.test.skip=true
+mvn spring-boot:build-image [note: Create docker image by maven]
+docker images [note: get all created images]
 
---push image into docker hub
-docker tag (docker image name) (tag name)
-docker image push docker.io/eazybytes/bank:latest
+***************** Convert image into container *******************************
+docker run -p 8080:8080 <image tag name>
+[note: 1st port is use to expose content to outside world and 2nd is which is maintain by docker in its isolated env]
+
+******************* Run docker container **********************************
+docker ps
+docker ps -a [note: -a show all container]
+
+****************** Check Docker logs ***************************************
+docker logs <container id>
+docker logs -f <container id> [note: -f for follow]
+
+************************* Stop docker container ****************************
+docker stop <container id>
+
+*************************** Pause docker container **************************
+docker pause <container id>
+docker unpause <container id>
+
+************************** kill docker container *****************************
+docker kill [note: instantly kill without get time]
+
+************************** Check docker staticstic ***************************
+docker stats [note: check docker conatner staticstics]
+
+************************** Remove docker container ***************************
+docker rm <conatiner id>
+
+****************** Run docker in detach mode (run without displaing logs) ****
+docker run -d -p 8080:8080 /transit
+
+************************* Push image to docker hub ***************************
+docker tag <docker image name> <tag name>
+docker image push docker.io/gauravkhrnr/bank:latest
 
 
--- docker compose
--It is a tool to define and run all container 
--create yml file
--put in root of project
-- docker-compose up (run command for docker compose)
-- docker-compose stop
+****************** Docker compose ********************************************
+- It is a tool to define and run all container 
+- create yml file
+- put in root of project
+
+docker-compose up [note: run command for docker compose]
+docker-compose stop
 
 - https://docs.docker.com/compose/compose-file/ (check docker version)
 
-
-
-
--- mvn clean install -Dmaven.test.skip=true
-
+****************** Run zipkin ************************************************
 docker run -d -p 9411:9411 openzipkin/zipkin
 
-docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+************************* Run rabbit mq *************************************
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
